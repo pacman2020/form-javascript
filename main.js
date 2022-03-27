@@ -4,9 +4,42 @@ const text = document.querySelector('#text')
 const btn = document.querySelector('#btn')
 const ul = document.querySelector('#ul')
 
+function deteleItem(){
+
+}
+
+function newBtn(colorText, backgroundBtn, nameBtn) {
+    //created button delete
+    let newButton = document.createElement('button')
+    newButton.textContent = nameBtn
+    newButton.style.background = backgroundBtn
+    newButton.style.color = colorText
+
+    //chama uma função interna
+    newButton.addEventListener('click', deteleItem)
+    return newButton
+}
+
+function addLi(text) {
+    //adding information and creating tag li
+    let li = document.createElement('li')
+    li.innerHTML = text
+
+    //add btn
+    const delBtn = newBtn('white','red','detele')
+    const edtBtn = newBtn('white','blue','update')
+    li.appendChild(delBtn)
+    li.appendChild(edtBtn)
+
+    ul.appendChild(li)
+}
+
+
 btn.addEventListener('click', (e)=>{
 
     e.preventDefault()
+
+
     try {
     
         //field validation
@@ -22,15 +55,13 @@ btn.addEventListener('click', (e)=>{
             return
         }
         
-        //adding information and creating tag li
-        let li = document.createElement('li')
-        li.innerHTML = text.value
-        ul.appendChild(li)
+        //created item
+        addLi(text.value)
     
         //clearing text fields
-        msg.innerHTML = text.value
+        msg.innerHTML = ''
         text.innerHTML = ''
-        
+
     } catch (error) {
         Bodymsg.style.background = 'yellow'
             msg.innerHTML = `${error}`
@@ -39,7 +70,7 @@ btn.addEventListener('click', (e)=>{
                 Bodymsg.style.background = ''
                 msg.innerHTML = ''
     
-            }, 2000)
+            }, 4000)
             return
     }
 
