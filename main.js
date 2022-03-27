@@ -2,6 +2,7 @@ const msg = document.querySelector('#msg')
 const Bodymsg = document.querySelector('.msg')
 const text = document.querySelector('#text')
 const btn = document.querySelector('#btn')
+const ul = document.querySelector('#ul')
 
 btn.addEventListener('click', (e)=>{
     e.preventDefault()
@@ -17,6 +18,10 @@ btn.addEventListener('click', (e)=>{
         }, 2000)
         return
     }
+    
+    let li = document.createElement('li')
+    li.innerHTML = text.value
+    ul.appendChild(li)
 
     msg.innerHTML = text.value
     text.innerHTML = ''
