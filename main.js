@@ -5,10 +5,14 @@ const btn = document.querySelector('#btn')
 const ul = document.querySelector('#ul')
 
 function deteleItem(){
-
+    console.log('detelendo')
 }
 
-function newBtn(colorText, backgroundBtn, nameBtn) {
+function editItem(){
+    console.log('editando')
+}
+
+function newBtn(colorText, backgroundBtn, nameBtn, callback) {
     //created button delete
     let newButton = document.createElement('button')
     newButton.textContent = nameBtn
@@ -16,7 +20,7 @@ function newBtn(colorText, backgroundBtn, nameBtn) {
     newButton.style.color = colorText
 
     //chama uma função interna
-    newButton.addEventListener('click', deteleItem)
+    newButton.addEventListener('click', callback)
     return newButton
 }
 
@@ -26,8 +30,8 @@ function addLi(text) {
     li.innerHTML = text
 
     //add btn
-    const delBtn = newBtn('white','red','detele')
-    const edtBtn = newBtn('white','blue','update')
+    const delBtn = newBtn('white','red','detele', deteleItem)
+    const edtBtn = newBtn('white','blue','update', editItem)
     li.appendChild(delBtn)
     li.appendChild(edtBtn)
 
