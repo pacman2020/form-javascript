@@ -1,58 +1,55 @@
 const msg = document.querySelector('#msg')
-const Bodymsg = document.querySelector('.msg')
-const text = document.querySelector('#text')
+const text = document.querySelector('#input')
 const btn = document.querySelector('#btn')
 const ul = document.querySelector('#ul')
 
-function deteleItem(){
-    console.log('detelendo')
+const db = []
+
+function listItem(){
+    ul.innerHTML = ''
+
+    for (item in db){
+        
+        let li = document.createElement('li')
+        li.textContent = db[item]
+
+        //add btn
+        let delBtn = document.createElement('button')
+        delBtn.textContent = 'delete'
+        delBtn.style.background = 'red'
+        delBtn.style.color = 'white'
+        delBtn.addEventListener('click', deteleItem)
+
+        li.appendChild(delBtn)
+
+        ul.appendChild(li)
+
+    }
+
 }
 
-function editItem(){
-    console.log('editando')
+function deteleItem(id){
+    db.pop(id)
+    listItem()
 }
 
-function newBtn(colorText, backgroundBtn, nameBtn, callback) {
-    //created button delete
-    let newButton = document.createElement('button')
-    newButton.textContent = nameBtn
-    newButton.style.background = backgroundBtn
-    newButton.style.color = colorText
-
-    //chama uma função interna
-    newButton.addEventListener('click', callback)
-    return newButton
+function editItem(id){
+    console.log('editando'+id)
 }
-
-function addLi(text) {
-    //adding information and creating tag li
-    let li = document.createElement('li')
-    li.innerHTML = text
-
-    //add btn
-    const delBtn = newBtn('white','red','detele', deteleItem)
-    const edtBtn = newBtn('white','blue','update', editItem)
-    li.appendChild(delBtn)
-    li.appendChild(edtBtn)
-
-    ul.appendChild(li)
-}
-
 
 btn.addEventListener('click', (e)=>{
 
     e.preventDefault()
 
-
     try {
     
         //field validation
-        if(text.value === '' && typeof(text.value) === String){
-            Bodymsg.style.background = 'red'
+        if(text.value === ''){
+            msg.style.background = 'red'
             msg.innerHTML = 'preencha o campo'
     
             setTimeout(()=>{
-                Bodymsg.style.background = ''
+                msg.style.background = ''
                 msg.innerHTML = ''
     
             }, 2000)
@@ -60,22 +57,23 @@ btn.addEventListener('click', (e)=>{
         }
         
         //created item
-        addLi(text.value)
+        db.push(text.value)
+        listItem()
     
         //clearing text fields
         msg.innerHTML = ''
         text.innerHTML = ''
 
     } catch (error) {
-        Bodymsg.style.background = 'yellow'
-            msg.innerHTML = `${error}`
+        msg.style.background = 'yellow'
+        msg.innerHTML = `${error}`
     
-            setTimeout(()=>{
-                Bodymsg.style.background = ''
-                msg.innerHTML = ''
+        setTimeout(()=>{
+            msg.style.background = ''
+            msg.innerHTML = ''
     
-            }, 4000)
-            return
+        }, 4000)
+        return
     }
 
 })
