@@ -1,0 +1,15 @@
+.form {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    margin: 20px;
+}
+.form #msg, #text, #btn {
+    padding: 10px;
+    margin: 20px;
+    width: 24%;
+}
+
+.form #btn{
+    text-align: center;
+}

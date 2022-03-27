@@ -5,10 +5,17 @@ const btn = document.querySelector('#btn')
 
 btn.addEventListener('click', (e)=>{
     e.preventDefault()
-    
+
     if(text.value === ''){
         Bodymsg.style.background = 'red'
-        return msg.innerHTML = 'preencha o campo'
+        msg.innerHTML = 'preencha o campo'
+
+        setTimeout(()=>{
+            Bodymsg.style.background = ''
+            msg.innerHTML = ''
+
+        }, 2000)
+        return
     }
 
     msg.innerHTML = text.value
