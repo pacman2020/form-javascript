@@ -5,25 +5,42 @@ const btn = document.querySelector('#btn')
 const ul = document.querySelector('#ul')
 
 btn.addEventListener('click', (e)=>{
+
     e.preventDefault()
-
-    if(text.value === ''){
-        Bodymsg.style.background = 'red'
-        msg.innerHTML = 'preencha o campo'
-
-        setTimeout(()=>{
-            Bodymsg.style.background = ''
-            msg.innerHTML = ''
-
-        }, 2000)
-        return
-    }
+    try {
     
-    let li = document.createElement('li')
-    li.innerHTML = text.value
-    ul.appendChild(li)
-
-    msg.innerHTML = text.value
-    text.innerHTML = ''
+        //field validation
+        if(text.value === '' && typeof(text.value) === String){
+            Bodymsg.style.background = 'red'
+            msg.innerHTML = 'preencha o campo'
+    
+            setTimeout(()=>{
+                Bodymsg.style.background = ''
+                msg.innerHTML = ''
+    
+            }, 2000)
+            return
+        }
+        
+        //adding information and creating tag li
+        let li = document.createElement('li')
+        li.innerHTML = text.value
+        ul.appendChild(li)
+    
+        //clearing text fields
+        msg.innerHTML = text.value
+        text.innerHTML = ''
+        
+    } catch (error) {
+        Bodymsg.style.background = 'yellow'
+            msg.innerHTML = `${error}`
+    
+            setTimeout(()=>{
+                Bodymsg.style.background = ''
+                msg.innerHTML = ''
+    
+            }, 2000)
+            return
+    }
 
 })
