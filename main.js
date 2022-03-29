@@ -3,7 +3,7 @@ const text = document.querySelector('#input')
 const btn = document.querySelector('#btn')
 const ul = document.querySelector('#ul')
 
-const db = []
+let db = ['12','sasa','SASA']
 
 function listItem(){
     ul.innerHTML = ''
@@ -12,15 +12,25 @@ function listItem(){
         
         let li = document.createElement('li')
         li.textContent = db[item]
-
-        //add btn
+        let pos = db.indexOf(db[item])
+        console.log('---> t',  db.indexOf(db[item]) )
+        //add btn delete
         let delBtn = document.createElement('button')
         delBtn.textContent = 'delete'
         delBtn.style.background = 'red'
         delBtn.style.color = 'white'
-        delBtn.addEventListener('click', deteleItem)
-
+        delBtn.addEventListener('click',(e)=> deteleItem(pos))
+        
         li.appendChild(delBtn)
+
+        //add btn edit
+        let edtBtn = document.createElement('button')
+        edtBtn.textContent = 'edit'
+        edtBtn.style.background = 'blue'
+        edtBtn.style.color = 'white'
+        edtBtn.addEventListener('click',(e)=> editItem(pos))
+
+        li.appendChild(edtBtn)
 
         ul.appendChild(li)
 
@@ -29,12 +39,14 @@ function listItem(){
 }
 
 function deteleItem(id){
-    db.pop(id)
+    db.splice(id,1)
     listItem()
 }
 
 function editItem(id){
-    console.log('editando'+id)
+    db[id] = prompt('edite item:',db[id])
+    console.log('editando '+ db[id])
+    listItem()
 }
 
 btn.addEventListener('click', (e)=>{
@@ -77,3 +89,5 @@ btn.addEventListener('click', (e)=>{
     }
 
 })
+
+listItem()
