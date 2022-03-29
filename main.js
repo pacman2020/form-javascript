@@ -3,7 +3,7 @@ const text = document.querySelector('#input')
 const btn = document.querySelector('#btn')
 const ul = document.querySelector('#ul')
 
-let db = ['12','sasa','SASA']
+let db = []
 
 function listItem(){
     ul.innerHTML = ''
@@ -12,8 +12,10 @@ function listItem(){
         
         let li = document.createElement('li')
         li.textContent = db[item]
+
+        //item position in the array
         let pos = db.indexOf(db[item])
-        console.log('---> t',  db.indexOf(db[item]) )
+
         //add btn delete
         let delBtn = document.createElement('button')
         delBtn.textContent = 'delete'
@@ -45,7 +47,6 @@ function deteleItem(id){
 
 function editItem(id){
     db[id] = prompt('edite item:',db[id])
-    console.log('editando '+ db[id])
     listItem()
 }
 
@@ -54,6 +55,7 @@ btn.addEventListener('click', (e)=>{
     e.preventDefault()
 
     try {
+        // valida quantidade de caracteres
     
         //field validation
         if(text.value === ''){
