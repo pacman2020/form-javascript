@@ -56,6 +56,18 @@ btn.addEventListener('click', (e)=>{
 
     try {
         // valida quantidade de caracteres
+        console.log(text.value.length)
+        if(text.value.length >= 25 ){
+            msg.style.background = 'red'
+            msg.innerHTML = 'digite no maximo 10 caracteris'
+    
+            setTimeout(()=>{
+                msg.style.background = ''
+                msg.innerHTML = ''
+    
+            }, 2000)
+            return
+        }
     
         //field validation
         if(text.value === ''){
